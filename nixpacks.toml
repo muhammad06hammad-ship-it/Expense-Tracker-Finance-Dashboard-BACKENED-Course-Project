@@ -8,11 +8,13 @@ cmds = [
  
 [phases.build]
 cmds = [
+  "mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache storage/logs bootstrap/cache",
+  "chmod -R 777 storage bootstrap/cache",
   "php artisan config:clear",
   "php artisan route:clear",
   "php artisan view:clear"
 ]
  
 [start]
-cmd = "mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache storage/logs bootstrap/cache && chmod -R 775 storage bootstrap/cache && touch database/database.sqlite && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT"
+cmd = "mkdir -p /tmp/views storage/framework/sessions storage/framework/views storage/framework/cache storage/logs bootstrap/cache && chmod -R 777 storage bootstrap/cache /tmp/views && touch database/database.sqlite && php artisan config:clear && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT"
  
